@@ -89,11 +89,11 @@ namespace ShipIt.Models.DataModels
             Id = apiModel.Id;
             Gtin = apiModel.Gtin;
             Gcp = apiModel.Gcp;
-            Name = apiModel.Name;
-            Weight = apiModel.Weight;
-            LowerThreshold = apiModel.LowerThreshold;
-            Discontinued = apiModel.Discontinued ? 1 : 0;
-            MinimumOrderQuantity = apiModel.MinimumOrderQuantity;
+            Name = apiModel.Name; // gtin_nm
+            Weight = apiModel.Weight; //m_g
+            LowerThreshold = apiModel.LowerThreshold; // l_th
+            Discontinued = apiModel.Discontinued ? 1 : 0; // ds
+            MinimumOrderQuantity = apiModel.MinimumOrderQuantity; // min_qt
         }
     }
 

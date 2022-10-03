@@ -36,12 +36,18 @@ namespace ShipIt.Controllers
 
             Log.Debug(String.Format("Found operations manager: {0}", operationsManager));
 
+            // creating a list of all the stock in the warehouse.
             var allStock = _stockRepository.GetStockByWarehouseId(warehouseId);
 
+            // creates a dictionary object for storing orderlines
             Dictionary<Company, List<InboundOrderLine>> orderlinesByCompany = new Dictionary<Company, List<InboundOrderLine>>();
+
+            // loops through all stock in warehouse and works out if you need to order more.
             foreach (var stock in allStock)
             {
                 Product product = new Product(_productRepository.GetProductById(stock.ProductId));
+                
+                // if product is below threshold, order more
                 if(stock.held < product.LowerThreshold && !product.Discontinued)
                 {
                     Company company = new Company(_companyRepository.GetCompany(product.Gcp));

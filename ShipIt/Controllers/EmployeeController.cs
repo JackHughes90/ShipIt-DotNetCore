@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ShipIt.Exceptions;
 using ShipIt.Models.ApiModels;
+using ShipIt.Models.DataModels;
 using ShipIt.Repositories;
 
 namespace ShipIt.Controllers
@@ -25,11 +26,15 @@ namespace ShipIt.Controllers
         public EmployeeResponse Get([FromQuery] string name)
         {
             Log.Info($"Looking up employee by name: {name}");
-
-            var employee = new Employee(_employeeRepository.GetEmployeeByName(name));
-
-            Log.Info("Found employee: " + employee);
-            return new EmployeeResponse(employee);
+            List<Employee> listOfEmployees = new List<Employee>();
+            foreach (EmployeeDataModel employee in _employeeRepository.GetEmployeesByName(name))
+            {
+                Employee newEmployee = new Employee(employee);
+                listOfEmployees.Add(newEmployee);
+            }
+            var employeeResponse = new EmployeeResponse(listOfEmployees);
+            Log.Info("Found employees: " + employeeResponse);
+            return employeeResponse;
         }
 
         [HttpGet("{warehouseId}")]

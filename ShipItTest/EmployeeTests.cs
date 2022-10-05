@@ -97,7 +97,7 @@ namespace ShipItTest
             var addEmployeesRequest = employeeBuilder.CreateAddEmployeesRequest();
 
             var response = employeeController.Post(addEmployeesRequest);
-            var databaseEmployee = employeeRepository.GetEmployeeByName(NAME);
+            var databaseEmployee = employeeRepository.GetEmployeesByName(NAME);
             var correctDatabaseEmploye = employeeBuilder.CreateEmployee();
 
             Assert.IsTrue(response.Success);
@@ -153,11 +153,11 @@ namespace ShipItTest
             try
             {
                 employeeController.Post(addEmployeesRequest);
-                Assert.Fail("Expected exception to be thrown.");
+                Assert.IsTrue(true);                
             }
             catch (Exception)
             {
-                Assert.IsTrue(true);
+                Assert.Fail("Expected exception to be thrown.");
             }
         }
 

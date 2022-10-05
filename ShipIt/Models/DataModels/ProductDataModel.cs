@@ -32,7 +32,6 @@ namespace ShipIt.Models.DataModels
             foreach (var property in properties)
             {
                 var attribute = (DatabaseColumnName)property.GetCustomAttributes(typeof(DatabaseColumnName), false).First();
-                Console.WriteLine(attribute.Name);
                 property.SetValue(this, dataReader[attribute.Name], null);
             }
         }

@@ -23,3 +23,11 @@ To run the tests you should be able to run dotnet test in the ShipItTests direct
 
 ## Deploying to Production
 TODO
+
+## Migrations
+When you receive this code, please run the migrations in the Migrations folder using the following code:
+```
+psql -U [User name] -d postgresql://localhost:5432/[Database name] -f .\Migrations\001AddIndices.sql
+psql -U [User name] -d postgresql://localhost:5432/[Database name] -f .\Migrations\002AddingPrimaryKeys.sql
+```
+This will ensure your database is up to date.

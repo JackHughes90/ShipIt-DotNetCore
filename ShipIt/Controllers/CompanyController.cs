@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using log4net.Config;
 using Microsoft.AspNetCore.Mvc;
 using ShipIt.Exceptions;
 using ShipIt.Models.ApiModels;
@@ -16,6 +17,8 @@ namespace ShipIt.Controllers
         public CompanyController(ICompanyRepository companyRepository)
         {
             _companyRepository = companyRepository;
+
+            XmlConfigurator.Configure(new System.IO.FileInfo(@"C:\Training\ShipIt-Shared\ShipIt-DotNetCore\ShipIt\log-config.xml"));
         }
 
         [HttpGet("{gcp}")]
